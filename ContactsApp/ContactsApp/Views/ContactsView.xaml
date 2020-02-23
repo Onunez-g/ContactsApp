@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ContactsApp.Views.ContactsView"
+             x:Name="Contacts"
+             Title="Contacts">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" Text="Add" Priority="0" Command="{Binding GoToAddViewCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Contacts}" SeparatorVisibility="None" CachingStrategy="RecycleElement">
+            <ListView.Header>
+                <Entry Placeholder="Search contacts" BackgroundColor="Transparent"/>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell ImageSource="{Binding Image}" Text="{Binding Name}" TextColor="Black" Detail="{Binding CellNumber}">
+                        <ImageCell.ContextActions>
+                            <MenuItem Text="Delete"
+                                      IsDestructive="True"
+                                      Command="{Binding Path=BindingContext.DeleteContactCommand, Source={x:Reference Contacts}}"
+                                      CommandParameter="{Binding .}"/>
+                            <MenuItem Text="More"
+                                      Command="{Binding Path=BindingContext.DisplayMoreCommand, Source={x:Reference Contacts}}"
+                                      CommandParameter="{Binding .}"/>
+                        </ImageCell.ContextActions>
+                    </ImageCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
