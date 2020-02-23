@@ -132,4 +132,82 @@
       <Name>ContactsApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\A.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\B.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\C.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\D.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\E.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\F.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\G.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\H.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\I.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\J.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\K.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\L.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\M.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\N.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\O.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\P.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Q.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\R.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\S.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\T.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\U.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\V.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\X.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Y.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Z.png" />
+  </ItemGroup>
 </Project>

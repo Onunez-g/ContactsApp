@@ -41,11 +41,6 @@ namespace ContactsApp.ViewModels
                         break;
                 }
             });
-            Contacts = new ObservableCollection<Contact>
-            {
-                new Contact() { Name = "Orlando Núñez", CellNumber = "8094889993", Image = "O" },
-                new Contact() { Name = "Miranda Núñez", CellNumber = "8093995196", Image = "M" }
-            };
         }
     }
 }
