@@ -8,7 +8,7 @@ Main Page:
 Options:
 
 <img src="https://github.com/Onunez-g/ContactsApp/blob/master/Options2.jpg" alt="Options 1" width="50%" />
-<img src="https://github.com/Onunez-g/ContactsApp/blob/master/Options1.jpg" alt="Option 2" width="50%" />
+<img src="https://github.com/Onunez-g/ContactsApp/blob/master/Options.jpg" alt="Option 2" width="50%" />
 
 Delete:
 
