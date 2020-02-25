@@ -18,6 +18,9 @@ namespace ContactsApp.Views
         public NewContactView(ObservableCollection<Contact> contacts, Contact contact = null)
         {
             InitializeComponent();
+            var nav = App.Current.MainPage as NavigationPage;
+            //nav.BarBackgroundColor = Color.White;
+            //nav.BarTextColor = Color.Black;
             BindingContext = new NewContactViewModel(contacts, contact);
         }
     }

@@ -14,7 +14,7 @@ namespace ContactsApp.ViewModels
 {
     public class ContactsViewModel
     {
-        public ObservableCollection<Contact> Contacts { get; set; }
+        public ObservableCollection<Contact> Contacts { get; set; } = new ObservableCollection<Contact>();
         public ICommand DeleteContactCommand { get; set; }
         public ICommand GoToAddViewCommand { get; set; }
         public ICommand DisplayMoreCommand { get; set; }

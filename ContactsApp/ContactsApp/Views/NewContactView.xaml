@@ -5,20 +5,44 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ContactsApp.Views.NewContactView"
+             NavigationPage.HasBackButton="True"
              Title="{Binding Title}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" Text="Save" Priority="0" Command="{Binding AddContactCommand}" CommandParameter="{Binding IsEdit}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Entry Text="{Binding Contact.Name}" Placeholder="Name" />
-            <Entry Text="{Binding Contact.CellNumber}" Placeholder="Number" />
-            <Button 
-                Command="{Binding AddContactCommand}"
-                CommandParameter="{Binding IsEdit}"
-                Text="{Binding ButtonText}" 
-                VerticalOptions="EndAndExpand" 
-                HorizontalOptions="FillAndExpand" 
-                BackgroundColor="Black" 
-                TextColor="White" 
-                Margin="10"/>
-        </StackLayout>
+        <ScrollView Margin="20">
+            <Grid RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Frame BackgroundColor="#1A73E9" CornerRadius="100" WidthRequest="55" HeightRequest="55" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Center">
+                    <Image Source="AddPhoto">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+                <Image Source="User" Grid.Row="1" Grid.Column="0" Opacity="0.7"/>
+                <Entry Text="{Binding Contact.FirstName}" Placeholder="First Name" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
+                <Image Source="ExpandMore" Grid.Row="1" Grid.Column="3" />
+                <Entry Text="{Binding Contact.LastName}" Placeholder="Last Name" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Image Source="Company" Grid.Row="3" Grid.Column="0" Opacity="0.7"/>
+                <Entry Text="{Binding Contact.Company}" Placeholder="Company" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Image Source="Phone" Grid.Row="4" Grid.Column="0" Opacity="0.7"/>
+                <Entry Text="{Binding Contact.CellNumber}" Placeholder="Number" Keyboard="Telephone" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Image Source="DropdownArrow" Grid.Row="5" Grid.Column="1" HorizontalOptions="End"/>
+                <Picker ItemsSource="{Binding NumberTags}" SelectedIndex="0" TextColor="Gray" SelectedItem="{Binding Contact.NumberTag}" Grid.Row="5" Grid.Column="1" />
+                <Image Source="Mail" Grid.Row="6" Grid.Column="0" Opacity="0.7"/>
+                <Entry Text="{Binding Contact.Email}" Placeholder="Email" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Image Source="DropdownArrow" Grid.Row="7" Grid.Column="1" HorizontalOptions="End"/>
+                <Picker ItemsSource="{Binding EmailTags}" SelectedIndex="0" TextColor="Gray" SelectedItem="{Binding Contact.EmailTag}" Grid.Row="7" Grid.Column="1"/>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

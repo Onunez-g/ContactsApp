@@ -7,7 +7,24 @@
              x:Class="ContactsApp.App">
     <Application.Resources>
         <ResourceDictionary>
-            
+            <Style x:Key="CustomFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White"/>
+                
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Padding" Value="15,5,15,5"/>
+                <Setter Property="Margin" Value="10,10,10,5"/>
+            </Style>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans"/>
+                <On Platform="IOS" Value="OpenSans-Regular"/>
+            </OnPlatform>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource NormalFont}"/>
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="FontFamily" Value="{StaticResource NormalFont}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
