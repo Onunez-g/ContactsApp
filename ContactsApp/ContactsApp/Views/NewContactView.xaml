@@ -9,6 +9,7 @@
              Title="{Binding Title}">
     
     <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary" IconImageSource="MoreVert" Priority="1" />
         <ToolbarItem Order="Primary" Text="Save" Priority="0" Command="{Binding AddContactCommand}" CommandParameter="{Binding IsEdit}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
@@ -21,10 +22,10 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 
-                <Frame BackgroundColor="#1A73E9" CornerRadius="100" WidthRequest="55" HeightRequest="55" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Center">
-                    <Image Source="AddPhoto">
+                <Frame BackgroundColor="{Binding FrameImage.BackgroundColor}" CornerRadius="{Binding FrameImage.CornerRadius}" WidthRequest="{Binding FrameImage.WidthRequest}" HeightRequest="{Binding FrameImage.HeightRequest}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Center">
+                    <Image Source="{Binding Contact.Image}">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer />
+                            <TapGestureRecognizer Command="{Binding AddContactPhotoCommand}"/>
                         </Image.GestureRecognizers>
                     </Image>
                 </Frame>

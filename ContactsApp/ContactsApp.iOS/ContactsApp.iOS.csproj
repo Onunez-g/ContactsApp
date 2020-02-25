@@ -212,4 +212,31 @@
   <ItemGroup>
     <BundleResource Include="Resources\Z.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\AddButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\AddPhoto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Company.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ExpandMore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Mail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\DropdownArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\MoreVert.png" />
+  </ItemGroup>
 </Project>
