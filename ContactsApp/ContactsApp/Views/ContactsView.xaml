@@ -5,19 +5,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:CustomEntry="clr-namespace:ContactsApp"
+             xmlns:local="clr-namespace:ContactsApp.Controls"
              x:Class="ContactsApp.Views.ContactsView"
              x:Name="Contacts"
              Title="Contacts"
              NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:NegateBooleanConverter x:Key="inverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <ListView 
                 Grid.Row="0" 
+                x:Name="listView"
                 ItemsSource="{Binding Contacts}" 
                 Margin="5"
-                SeparatorVisibility="None" 
-                CachingStrategy="RecycleElement" 
-                HorizontalOptions="FillAndExpand">
+                SeparatorVisibility="None"
+                RowHeight="70"
+                RefreshCommand="{Binding RefreshListCommand}"
+                IsRefreshing="{Binding IsRefreshingList, Mode=TwoWay}"
+                IsPullToRefreshEnabled="True">
                 <ListView.Header>
                     <Frame Style="{StaticResource CustomFrame}">
                         <Grid HorizontalOptions="Fill">
@@ -30,13 +39,14 @@
                             <CustomEntry:GoogleEntry  Placeholder="Search Contacts" HorizontalOptions="FillAndExpand" Grid.Column="1"/>
                             <Image Source="BurgerMenu" Grid.Column="0" HorizontalOptions="Start"/>
                             <Image Source="ThreeDots" Grid.Column="2"/>
+                            <Frame Grid.Column="3" CornerRadius="100" BackgroundColor="Black" WidthRequest="20" Margin="5, 15" HeightRequest="20" Padding="0"/>
                         </Grid>
                     </Frame>
                 </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell ImageSource="{Binding Image}" Text="{Binding Name}" TextColor="Black">
-                            <ImageCell.ContextActions>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
                                 <MenuItem Text="Delete"
                                       IsDestructive="True"
                                       Command="{Binding Path=BindingContext.DeleteContactCommand, Source={x:Reference Contacts}}"
@@ -44,8 +54,22 @@
                                 <MenuItem Text="More"
                                       Command="{Binding Path=BindingContext.DisplayMoreCommand, Source={x:Reference Contacts}}"
                                       CommandParameter="{Binding .}"/>
-                            </ImageCell.ContextActions>
-                        </ImageCell>
+                            </ViewCell.ContextActions>
+                            <Grid Margin="10,5" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"/>
+                                </Grid.RowDefinitions>
+                                <local:InitialsView Text="{Binding Image}" Color="{Binding ImageColor}" HorizontalOptions="Center" HeightRequest="60" Padding="0" Grid.Row="0" Grid.Column="0" IsVisible="{Binding HasImage, Converter={StaticResource inverter}}"/>
+                                <Frame CornerRadius="60" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" HeightRequest="50" WidthRequest="50" Margin="5" Padding="0" IsClippedToBounds="True" IsVisible="{Binding HasImage}">
+                                    <Image Source="{Binding Image}"/>
+                                </Frame>
+                                <Label Text="{Binding Name}" TextColor="Black" Margin="0" Padding="0" Grid.Row="0" VerticalOptions="Center" Grid.Column="1"/>
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

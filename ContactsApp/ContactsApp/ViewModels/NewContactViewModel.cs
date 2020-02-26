@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -16,7 +17,7 @@ namespace ContactsApp.ViewModels
     {
         public Contact Contact { get; set; } = new Contact() {Image = "AddPhoto", NumberTag = "Celular", EmailTag = "Particular"};
         public bool IsEdit { get; set; }
-        public string Title { get; set; } = "New contact";
+        public string Title { get; set; } = "Create contact";
         public FrameImage FrameImage { get; set; } = new FrameImage();
         public ICommand AddContactCommand { get; set; }
         public ICommand AddContactPhotoCommand { get; set; }
@@ -27,12 +28,10 @@ namespace ContactsApp.ViewModels
             if (contact != null)
             {
                 Contact = contact;
-                FrameImage = FrameImage = new FrameImage()
+                FrameImage = new FrameImage()
                 {
-                    BackgroundColor = "Transparent",
-                    CornerRadius = "0",
-                    HeightRequest = "100",
-                    WidthRequest = "200"
+                    IsFrameVisible = false,
+                    IsImageVisible = true
                 };
                 IsEdit = true;
                 Title = "Edit contact";
@@ -41,23 +40,25 @@ namespace ContactsApp.ViewModels
             {
                 if(string.IsNullOrEmpty(Contact.FirstName) || string.IsNullOrEmpty(Contact.LastName) || string.IsNullOrEmpty(Contact.CellNumber)) 
                 {
-                    await App.Current.MainPage.DisplayAlert("Error", "All fields are required", "Ok");
+                    await App.Current.MainPage.DisplayAlert("Error", "Names and Number fields are required", "Ok");
                     return;
                 }
-                Contact.Image = Contact.Image ?? $"{Contact.Name[0]}";
-                if(!isEdit)
+                Contact.ImageColor = Contact.HasImage ? null : GetImageColor();
+                Contact.Image = Contact.HasImage ? Contact.Image : $"{Contact.Name[0]}";
+                Contact.Id = await App.ContactDatabase.SaveContact(Contact);
+                if (!isEdit)
                     contacts.Add(Contact);
                 await App.Current.MainPage.Navigation.PopAsync();
             });
             AddContactPhotoCommand = new Command(async () =>
             {
-                string option = await App.Current.MainPage.DisplayActionSheet("Change photo", "Cancel", "", "Take photo", "Pick photo");
+                string option = await App.Current.MainPage.DisplayActionSheet("Change photo", "Cancel", "", "Take photo", "Choose photo");
                 switch (option)
                 {
                     case "Take photo":
                         TakePhoto();
                         break;
-                    case "Pick photo":
+                    case "Choose photo":
                         PickPhoto();
                         break;
                 }
@@ -88,13 +89,23 @@ namespace ContactsApp.ViewModels
             if (file == null)
                 return;
             Contact.Image = file.Path;
-            FrameImage = new FrameImage()
+            Contact.HasImage = true;
+            FrameImage = new FrameImage() { IsFrameVisible = false, IsImageVisible = true };
+        }
+        private string GetImageColor()
+        {
+            var colors = new List<string>
             {
-                BackgroundColor = "Transparent",
-                CornerRadius = "0",
-                HeightRequest = "100",
-                WidthRequest = "200"
+                "#EB6858",
+                "#ADCEE0",
+                "#AD5CF3",
+                "#F06AB0",
+                "#F68F41",
+                "#63B47F",
+                "#FCC731"
             };
+            Random rnd = new Random();
+            return colors.OrderBy(x => rnd.Next()).First();
         }
         private async void PickPhoto()
         {
@@ -104,20 +115,17 @@ namespace ContactsApp.ViewModels
                 await App.Current.MainPage.DisplayAlert("Photos Not Supported", "Permission not granted to photos.", "OK");
                 return;
             }
-            var file = await CrossMedia.Current.PickPhotoAsync().ConfigureAwait(true);
+            var file = await CrossMedia.Current.PickPhotoAsync();
 
             if (file == null)
                 return;
             Contact.Image = file.Path;
+            Contact.HasImage = true;
             file.Dispose();
-            FrameImage = new FrameImage()
-            {
-                BackgroundColor = "Transparent",
-                CornerRadius = "0",
-                HeightRequest = "100",
-                WidthRequest = "200"
-            };
+            FrameImage = new FrameImage() { IsFrameVisible = false, IsImageVisible = true };
         }
+        #pragma warning disable 67
         public event PropertyChangedEventHandler PropertyChanged;
+        #pragma warning restore 67
     }
 }

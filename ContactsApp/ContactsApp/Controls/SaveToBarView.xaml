@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ContactsApp.Controls.SaveToBarView">
+  <ContentView.Content>
+        <Frame HasShadow="False" BackgroundColor="LightGray" Padding="0" Margin="0">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Save to" VerticalOptions="Center" TextColor="Black" FontAttributes="Bold" Margin="10,0,0,0"/>
+                <Frame CornerRadius="30" HasShadow="False" Padding="5" Margin="5">
+                    <StackLayout Orientation="Horizontal">
+                        <Frame CornerRadius="100" BackgroundColor="Black" WidthRequest="20" Margin="5" HeightRequest="20" Padding="0"/>
+                        <Label Text="nunez.orlando2@gmail.com" VerticalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                        <Image Source="ExpandMore" Opacity="0.8"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
