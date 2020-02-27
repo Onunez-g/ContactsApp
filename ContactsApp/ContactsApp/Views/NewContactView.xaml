@@ -8,7 +8,11 @@
              xmlns:local="clr-namespace:ContactsApp.Controls"
              NavigationPage.HasBackButton="True"
              Title="{Binding Title}">
-    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:NegateBooleanConverter x:Key="inverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Primary" IconImageSource="MoreVert" Priority="1" />
         <ToolbarItem Order="Primary" Text="Save" Priority="0" Command="{Binding AddContactCommand}" CommandParameter="{Binding IsEdit}"/>
@@ -35,20 +39,14 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <local:SaveToBarView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"/>
-                <Frame IsVisible="{Binding FrameImage.IsFrameVisible}" Margin="20" BackgroundColor="#1A73E9" CornerRadius="100" WidthRequest="20" HeightRequest="55" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Center">
-                    <Image Source="{Binding Contact.Image}" Margin="0">
+                <Frame IsVisible="{Binding IsImageVisible}" Margin="20" Padding="{Binding ImagePadding}" IsClippedToBounds="True" BackgroundColor="{Binding ImageBackground}" CornerRadius="100" WidthRequest="20" HeightRequest="55" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Center">
+                    <Image Source="{Binding Contact.Image}" Margin="0" Scale="{Binding ImageScale}">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding AddContactPhotoCommand}"/>
                         </Image.GestureRecognizers>
                     </Image>
                 </Frame>
-                <Frame IsVisible="{Binding FrameImage.IsImageVisible}" IsClippedToBounds="True" Padding="0" BackgroundColor="White" CornerRadius="100" WidthRequest="100" HeightRequest="55" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Center">
-                    <Image Source="{Binding Contact.Image}" HeightRequest="100" WidthRequest="100">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding AddContactPhotoCommand}"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                </Frame>
+                <local:InitialsView VerticalOptions="CenterAndExpand" Margin="0" IsVisible="{Binding IsImageVisible, Converter={StaticResource inverter}}" WidthRequest="50" Text="{Binding Contact.Image}" Color="{Binding Contact.ImageColor}" HeightRequest="60" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="Center"/>
                 <Image Margin="10,0,0,0" Source="User" Grid.Row="2" Grid.Column="0" Opacity="0.7"/>
                 <Entry Text="{Binding Contact.FirstName}" Placeholder="First name" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" />
                 <Image Margin="0,0,10,0" Source="ExpandMore" Grid.Row="2" Grid.Column="3" />

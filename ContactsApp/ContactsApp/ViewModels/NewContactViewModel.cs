@@ -1,4 +1,5 @@
 ﻿using ContactsApp.Models;
+using ContactsApp.Views;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -18,7 +19,10 @@ namespace ContactsApp.ViewModels
         public Contact Contact { get; set; } = new Contact() {Image = "AddPhoto", NumberTag = "Celular", EmailTag = "Particular"};
         public bool IsEdit { get; set; }
         public string Title { get; set; } = "Create contact";
-        public FrameImage FrameImage { get; set; } = new FrameImage();
+        public bool IsImageVisible { get; set; } = true;
+        public string ImageBackground { get; set; } = "#1A73E9";
+        public string ImageScale { get; set; } = "1";
+        public string ImagePadding { get; set; } = "0";
         public ICommand AddContactCommand { get; set; }
         public ICommand AddContactPhotoCommand { get; set; }
         public List<string> NumberTags { get; set; }
@@ -28,13 +32,12 @@ namespace ContactsApp.ViewModels
             if (contact != null)
             {
                 Contact = contact;
-                FrameImage = new FrameImage()
-                {
-                    IsFrameVisible = false,
-                    IsImageVisible = true
-                };
                 IsEdit = true;
                 Title = "Edit contact";
+                IsImageVisible = contact.HasImage;
+                ImageBackground = "Transparent";
+                ImageScale = "4";
+                ImagePadding = "";
             }
             AddContactCommand = new Command<bool>(async (isEdit) =>
             {
@@ -52,7 +55,7 @@ namespace ContactsApp.ViewModels
             });
             AddContactPhotoCommand = new Command(async () =>
             {
-                string option = await App.Current.MainPage.DisplayActionSheet("Change photo", "Cancel", "", "Take photo", "Choose photo");
+                string option = await App.Current.MainPage.DisplayActionSheet("Change photo", "Cancel", "", "Take photo", "Choose photo", "Scan QR code");
                 switch (option)
                 {
                     case "Take photo":
@@ -60,6 +63,9 @@ namespace ContactsApp.ViewModels
                         break;
                     case "Choose photo":
                         PickPhoto();
+                        break;
+                    case "Scan QR code":
+                        await App.Current.MainPage.Navigation.PushAsync(new QRScanningView(contacts));
                         break;
                 }
             });
@@ -90,7 +96,8 @@ namespace ContactsApp.ViewModels
                 return;
             Contact.Image = file.Path;
             Contact.HasImage = true;
-            FrameImage = new FrameImage() { IsFrameVisible = false, IsImageVisible = true };
+            IsImageVisible = true;
+
         }
         private string GetImageColor()
         {
@@ -122,7 +129,7 @@ namespace ContactsApp.ViewModels
             Contact.Image = file.Path;
             Contact.HasImage = true;
             file.Dispose();
-            FrameImage = new FrameImage() { IsFrameVisible = false, IsImageVisible = true };
+            IsImageVisible = true;
         }
         #pragma warning disable 67
         public event PropertyChangedEventHandler PropertyChanged;

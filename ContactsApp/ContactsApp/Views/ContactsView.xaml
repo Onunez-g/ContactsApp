@@ -31,15 +31,20 @@
                     <Frame Style="{StaticResource CustomFrame}">
                         <Grid HorizontalOptions="Fill">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="7*"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
                             <CustomEntry:GoogleEntry  Placeholder="Search Contacts" HorizontalOptions="FillAndExpand" Grid.Column="1"/>
                             <Image Source="BurgerMenu" Grid.Column="0" HorizontalOptions="Start"/>
-                            <Image Source="ThreeDots" Grid.Column="2"/>
-                            <Frame Grid.Column="3" CornerRadius="100" BackgroundColor="Black" WidthRequest="20" Margin="5, 15" HeightRequest="20" Padding="0"/>
+                            <Image Source="MoreVert2" Grid.Column="2"/>
+                            <Frame Grid.Column="3" CornerRadius="120" IsClippedToBounds="True" Margin="0,8" BackgroundColor="Transparent" WidthRequest="20" HeightRequest="10" Padding="0">
+                                <Image Source="UserImage.jfif"/>
+                            </Frame>
                         </Grid>
                     </Frame>
                 </ListView.Header>

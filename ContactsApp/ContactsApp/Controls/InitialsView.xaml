@@ -7,6 +7,6 @@
              xmlns:views="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="ContactsApp.Controls.InitialsView">
   <ContentView.Content>
-        <views:SKCanvasView Margin="0" VerticalOptions="Center" PaintSurface="OnPainting" IsVisible="{Binding IsVisible}"/>
+        <views:SKCanvasView Margin="0" VerticalOptions="Center" PaintSurface="OnPainting" IsVisible="{Binding IsVisible}" />
     </ContentView.Content>
 </ContentView>

@@ -22,6 +22,7 @@ namespace ContactsApp.Controls
         void OnPainting(object sender, SKPaintSurfaceEventArgs e)
         {
             var surface = e.Surface;
+            
             var canvas = surface.Canvas;
             canvas.Clear();
 

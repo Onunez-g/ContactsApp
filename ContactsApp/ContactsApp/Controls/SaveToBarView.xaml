@@ -11,7 +11,9 @@
                 <Label Text="Save to" VerticalOptions="Center" TextColor="Black" FontAttributes="Bold" Margin="10,0,0,0"/>
                 <Frame CornerRadius="30" HasShadow="False" Padding="5" Margin="5">
                     <StackLayout Orientation="Horizontal">
-                        <Frame CornerRadius="100" BackgroundColor="Black" WidthRequest="20" Margin="5" HeightRequest="20" Padding="0"/>
+                        <Frame CornerRadius="100" IsClippedToBounds="True" BackgroundColor="Transparent" WidthRequest="20" Margin="5" HeightRequest="20" Padding="0">
+                            <Image Source="UserImage.jfif"/>
+                        </Frame>
                         <Label Text="nunez.orlando2@gmail.com" VerticalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
                         <Image Source="ExpandMore" Opacity="0.8"/>
                     </StackLayout>
